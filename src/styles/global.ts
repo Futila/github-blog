@@ -1,6 +1,4 @@
-import { createGlobalStyle } from "styled-components";
-
-
+import { createGlobalStyle } from 'styled-components'
 
 export const Globalstyle = createGlobalStyle`
   * {
@@ -17,13 +15,13 @@ export const Globalstyle = createGlobalStyle`
 
   :focus {
     outline: none;
-    box-shadow: 0 0 0 2px ${props => props.theme.blue};
+    box-shadow: 0 0 0 2px ${(props) => props.theme.blue};
   }
 
 
   body {
-    background: ${props => props.theme["base-background"]};
-    color: ${props => props.theme["base-text"]};
+    background: ${(props) => props.theme['base-background']};
+    color: ${(props) => props.theme['base-text']};
     -webkit-font-smoothing: antialiased;
   }
 

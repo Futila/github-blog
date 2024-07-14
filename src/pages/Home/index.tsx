@@ -24,7 +24,7 @@ export interface IPost {
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const getPosts = useCallback(async(query: string = "") => {
     try {

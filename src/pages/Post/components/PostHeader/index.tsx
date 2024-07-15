@@ -8,17 +8,35 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
+import { IPost } from '../../../Home'
+import { relativeDateFormatter } from '../../../../utils/formatter'
+import { Spinner } from '../../../../components/Spinner'
 
-export function PostHeader() {
+
+
+
+interface PostHeaderProps {
+  postData: IPost;
+  isLoading: boolean;
+}
+
+
+export function PostHeader({isLoading, postData}: PostHeaderProps) {
   const navigate = useNavigate()
 
   function goBack() {
     navigate(-1)
   }
 
+
+  const formattedDate = relativeDateFormatter(postData?.created_at)
+
   return (
     <PostHeaderContainer>
-      <header>
+    {isLoading ? (
+      <Spinner/>
+    ): <>
+        <header>
         <ExternalLink
           /* as="button" */
           onClick={goBack}
@@ -26,24 +44,27 @@ export function PostHeader() {
           variant="iconLeft"
           text="Voltar"
         />
-        <ExternalLink text="Ver no Github" href="#" target="_blank" />
+        <ExternalLink text="Ver no Github" href={postData.html_url} target="_blank" />
       </header>
 
-      <h1>JavaScript data types and data structures</h1>
+      <h1>{postData.title}</h1>
 
       <ul>
         <li>
           <FontAwesomeIcon icon={faGithub} />
-          cameronwll
+         {postData.user.login}
         </li>
         <li>
           <FontAwesomeIcon icon={faCalendar} />
-          Há 1 dia
+         {formattedDate}
         </li>
         <li>
-          <FontAwesomeIcon icon={faComment} />5 comentários
+          <FontAwesomeIcon icon={faComment} />{postData.comments} comentários
         </li>
       </ul>
+    
+    </>
+  }
     </PostHeaderContainer>
   )
 }

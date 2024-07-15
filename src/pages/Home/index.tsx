@@ -4,6 +4,7 @@ import { Profile } from './components/Profile'
 import { SearchInput } from './components/SearchInput'
 import { PostsListContainer } from './styles'
 import { api } from '../../lib/axios';
+import { Spinner } from '../../components/Spinner';
 
 
 const username= import.meta.env.VITE_GITHUB_USERNAME; 
@@ -49,6 +50,8 @@ export function Home() {
     <>
       <Profile />
       <SearchInput getPosts={getPosts} postsLength={posts.length} />
+      {isLoading ?
+      <Spinner/> :(
       <PostsListContainer>
         {
           posts.map(post => (
@@ -56,7 +59,7 @@ export function Home() {
           ))
         }
    
-      </PostsListContainer>
+      </PostsListContainer>)}
     </>
   )
 }
